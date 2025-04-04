@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query, Param, Delete } from '@nestjs/common';
 import { CartService } from './cart.service';
 
 @Controller('cart')
@@ -11,7 +11,12 @@ export class CartController {
   }
 
   @Get()
-  getCartItems(@Query('userId') userId: number) {
+  getCartItems(@Query('userId') userId: string) {
     return this.cartService.getCartItems(userId);
+  }
+
+  @Delete('delete/:userId')
+  deleteCartItems(@Param('userId') userId: string) {
+    return this.cartService.deleteCartItems(userId);
   }
 }

@@ -6,11 +6,15 @@ import { Cart } from './cart.model';
 export class CartService {
   constructor(@InjectModel(Cart) private cartModel: typeof Cart) {}
 
-  async addToCart(userId: number, pizzaDetails: string) {
+  async addToCart(userId: string, pizzaDetails: object) {
     return this.cartModel.create({ userId, pizzaDetails });
   }
 
-  async getCartItems(userId: number) {
+  async getCartItems(userId: string) {
     return this.cartModel.findAll({ where: { userId } });
+  }
+
+  async deleteCartItems(userId: string) {
+    return this.cartModel.destroy({ where: { userId } });
   }
 }
