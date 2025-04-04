@@ -1,18 +1,27 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
-@Table
-export class User extends Model {
-  @PrimaryKey
-  @AutoIncrement
-  @Column
-  declare id: number; // Use "declare" to prevent TypeScript errors
+@Table({
+  tableName: 'users',
+  timestamps: true,
+})
+export class User extends Model<User> {  // ✅ Ensure Model<User> is specified
+  @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4, // ✅ Automatically generate UUID
+    primaryKey: true,
+  })
+  declare id: string; // ✅ Use 'declare' to prevent override errors
 
-  @Column
-  name: string;
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    unique: true,
+  })
+  declare email: string;
 
-  @Column({ unique: true })
-  email: string;
-
-  @Column
-  password: string;
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  declare password: string;
 }
