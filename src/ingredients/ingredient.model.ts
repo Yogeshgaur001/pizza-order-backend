@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, AutoIncrement, DataType } from 'sequelize-typescript';
 
 @Table
 export class Ingredient extends Model {
@@ -10,6 +10,9 @@ export class Ingredient extends Model {
   @Column
   name: string;
 
-  @Column
+  @Column({
+    type: DataType.FLOAT, // ✅ Use FLOAT to allow decimal values
+    allowNull: false,
+  })
   price: number;
 }

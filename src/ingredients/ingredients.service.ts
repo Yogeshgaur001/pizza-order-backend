@@ -9,4 +9,8 @@ export class IngredientsService {
   async getAllIngredients() {
     return this.ingredientModel.findAll();
   }
+
+  async createIngredient(name: string, price: number) {
+    return this.ingredientModel.create({ name, price });
+  }
 }
