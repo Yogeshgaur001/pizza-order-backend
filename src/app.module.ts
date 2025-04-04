@@ -8,7 +8,9 @@ import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true, // Makes environment variables globally available
+    }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.DATABASE_HOST,
