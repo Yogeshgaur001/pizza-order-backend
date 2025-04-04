@@ -1,4 +1,4 @@
-import { Table, Column, Model, ForeignKey, PrimaryKey, AutoIncrement } from 'sequelize-typescript';
+import { Table, Column, Model, ForeignKey, PrimaryKey, AutoIncrement, DataType } from 'sequelize-typescript';
 import { User } from '../users/user.model';
 
 @Table
@@ -9,9 +9,13 @@ export class Order extends Model {
   declare id: number;
 
   @ForeignKey(() => User)
-  @Column
-  userId: number;
+  @Column({
+    type: DataType.UUID,
+  })
+  userId: string;
 
-  @Column
-  orderDetails: string;
+  @Column({
+    type: DataType.JSONB,
+  })
+  orderDetails: object;
 }
